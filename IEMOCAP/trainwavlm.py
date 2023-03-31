@@ -17,8 +17,7 @@ from torch.backends import cudnn
 # from statistics import mode
 import matplotlib.pyplot as plt
 
-from dynamicwindow18 import DynamicTransformer1
-# from xiaorong import DynamicTransformer1
+from model import DynamicTransformer
 import torch.nn.functional as F
 from transformer import Vanilla_Transformer
 from hierarchicaltransformer import localTranformer
