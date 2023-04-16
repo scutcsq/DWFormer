@@ -10,3 +10,5 @@ Feature extraction file is in ./Feature_extractor/data_preprocess.py
 Download the IEMOCAP dataset from https://sail.usc.edu/iemocap/
 
 Download the Meld dataset from https://affective-meld.github.io
+
+The code will be uploaded soon.
