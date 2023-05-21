@@ -23,6 +23,7 @@ To process data in batches, we pad the data into the same length. The length of 
 > python data_preprocess.py
 ## Dataset:
 > python ./IEMOCAP/Dataset.py
+> 
 > python ./Meld/Dataset.py
 ## Training & Evaluating:
 
@@ -31,6 +32,7 @@ The files are IEMOCAP/train.py & MELD/train.py
 The name of the model file is model.py
 
 > python ./IEMOCAP/train.py
+> 
 > python ./Meld/train.py
 
 ## Citation:
