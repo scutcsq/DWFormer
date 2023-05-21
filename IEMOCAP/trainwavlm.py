@@ -17,10 +17,8 @@ from torch.backends import cudnn
 # from statistics import mode
 import matplotlib.pyplot as plt
 
-from model import DynamicTransformer
+from model import DWFormer
 import torch.nn.functional as F
-from transformer import Vanilla_Transformer
-from hierarchicaltransformer import localTranformer
 import math
 import lmdb
 
@@ -66,15 +64,7 @@ for i in range(1,6):
     np.random.seed(seed)
     random.seed(seed)
     torch.cuda.empty_cache()
-
-    # traindata = r'train'+str(i)+'data.npy'
-    # trainlabel = r'train'+str(i)+'label.npy'
-
-    # developdata = r'valid'+str(i)+'data.npy'
-    # developlabel = r'valid'+str(i)+'label.npy'
-
-    # train_dataset = ADDataset(traindata,trainlabel)#training set
-    # develop_dataset = ADDataset(developdata,developlabel)#valid set
+    #generate Dataset and DataLoader
     out_path = r'./new_database_wavlm_mask_324/'
     # out_path = r'./new_database_hubert_mask_324/'
     # out_path = r'./randoms/'
@@ -85,15 +75,15 @@ for i in range(1,6):
     trainDataset = DataLoader(dataset=train_dataset,batch_size=32,shuffle=True,drop_last = False)
     developDataset = DataLoader(dataset=develop_dataset,batch_size=32,shuffle= False)
 
-    #---------------------------------------------------参数设置---------------------------------
+    #---------------------------------------------------parameter setting---------------------------------
     # model = Vanilla_Transformer(input_dim = 1024, ffn_embed_dim = 512, num_layers = 7, num_heads = 8, num_classes = 4,dropout = 0.3).to(device)
-    model = DynamicTransformer1(feadim = 1024, n_head = 8, FFNdim = 512, classnum = 4).to(device)
+    model = DWFormer(feadim = 1024, n_head = 8, FFNdim = 512, classnum = 4).to(device)
     # model = localTranformer2(feadim = 1024,n_head = 8, FFNdim = 512, classnum = 4).to(device)
     WD = 5e-4
     LR_DECAY = 0.5
     EPOCH = 120
     STEP_SIZE = 5
-    lr = 3e-4
+    lr = 5e-4
     # optimizer = torch.optim.Adam(model.parameters(), lr = 5e-6, betas=(0.9, 0.999), eps=1e-08, weight_decay=WD)
     optimizer = torch.optim.SGD(model.parameters(),lr = lr, momentum = 0.9)
     # scheduler = lr_scheduler.StepLR(optimizer, step_size=STEP_SIZE, gamma=LR_DECAY)
