@@ -16,7 +16,7 @@ cuda = True if torch.cuda.is_available() else False
 目标:将一整段很长的语音进行切割，只保留
 '''
 
-checkpoint = torch.load('/148Dataset/PretrainedModel/model.audio/english/WavLM-Large.pt')
+checkpoint = torch.load('/148Dataset/PretrainedModel/model.audio/english/WavLM-Large.pt')#Pretrained model checkpoint path.
 cfg = WavLMConfig(checkpoint['cfg'])
 model = WavLM(cfg)
 model.load_state_dict(checkpoint['model'])
@@ -25,9 +25,9 @@ model.eval()
 
 #IEMOCAP:
 for i in range(1,6):
-    csv = r'/148Dataset/data-chen.shuaiqi/IEMOCAP/IEMOCAP_full_release/data'
-    inputdir = r'/148Dataset/data-chen.shuaiqi/IEMOCAP/IEMOCAP_full_release/Session'
-    outputdir = r'/148Dataset/data-chen.shuaiqi/IEMOCAP/IEMOCAP_full_release/Feature/WavLM/Session'
+    csv = r'iemocap_data/data'# csv path. 
+    inputdir = r'/148Dataset/data-chen.shuaiqi/IEMOCAP/IEMOCAP_full_release/Session'# data path.
+    outputdir = r'/148Dataset/data-chen.shuaiqi/IEMOCAP/IEMOCAP_full_release/Feature/WavLM/Session' #feature path.
     dir = inputdir + str(i) + r'/sentences/wav/'
     csvs = csv + str(i) + '.csv'
     csv = pd.read_csv(csvs)
