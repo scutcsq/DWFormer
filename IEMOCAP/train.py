@@ -105,7 +105,8 @@ for i in range(1,6):
             labels = labels.view(len(labels))
             labels = labels.to(device)
             optimizer.zero_grad()
-            out, attn, windowattn, ML = model(datas,mask)
+            # out, attn, windowattn, ML = model(datas,mask)
+            out = model(datas, mask)
             err1 = loss(out,labels.long())
             err1.backward()
             optimizer.step()
@@ -135,7 +136,8 @@ for i in range(1,6):
             labels = labels.to(device)
             #原有
             with torch.no_grad():
-                out, attn, windowattn, ML = model(datas,mask)
+                # out, attn, windowattn, ML = model(datas,mask)
+                out = model(datas, mask)
             err1 = loss(out,labels.long())
             pred = torch.max(out.cpu().data, 1)[1].numpy()
             actu = labels.cpu().data.numpy()
