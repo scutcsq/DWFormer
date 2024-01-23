@@ -64,7 +64,9 @@ def preprocess_lmdb_MELD(out_path,mode,csvname,reset,length=225):
             if os.path.exists(namepath):
                 # data1 = io.loadmat(namepath)['wavlm']
                 data1 = np.load(namepath)
-                newdata1 = np.zeros((1024,length),dtype = np.float32)
+                newdata1 = np.zeros((length,1024),dtype = np.float32)
+                maskdata = np.zeros((length), dtype = np.float32)
+                ones = np.ones((length), dtype = np.float32)
                 lens = data1.shape[1]
                 if lens >= length:
                     lens = length
@@ -73,13 +75,14 @@ def preprocess_lmdb_MELD(out_path,mode,csvname,reset,length=225):
                 # print(speaker[i])
                 # print(sexlabel)
                 if sexlabel!= 2:
-                    newdata1[:, :lens] = data1[:, :lens]
+                    newdata1[:lens, :] = data1[:lens, :]
+                    maskdata[lens:] = ones[lens:] 
                     key_data = 'data-%05d'%count
                     key_label = 'label-%05d'%count
-                    key_sex = 'sex-%05d'%count
+                    key_mask = 'mask-%05d'%count
                     txn.put(key_data.encode(),newdata1)
                     txn.put(key_label.encode(),np.array([newlabel]))
-                    txn.put(key_sex.encode(),np.array([sexlabel]))
+                    txn.put(key_mask.encode(),maskdata)
                     # txn.put(key_mask.encode(),mask)
                     # print(newlabel)
                     count += 1  
