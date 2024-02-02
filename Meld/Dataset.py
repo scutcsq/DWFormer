@@ -67,7 +67,7 @@ def preprocess_lmdb_MELD(out_path,mode,csvname,reset,length=225):
                 newdata1 = np.zeros((length,1024),dtype = np.float32)
                 maskdata = np.zeros((length), dtype = np.float32)
                 ones = np.ones((length), dtype = np.float32)
-                lens = data1.shape[1]
+                lens = data1.shape[0]
                 if lens >= length:
                     lens = length
                 newlabel = label_MELD_change(emotion[i])
