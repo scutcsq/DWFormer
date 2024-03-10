@@ -1,6 +1,6 @@
 # DWFormer: Dynamic Window Transformer for Speech Emotion Recognition
 
-This work is accepted by ICASSP 2023.
+This work is accepted by ICASSP 2023 Oral.
 
 The paper link is: 
 
