@@ -40,6 +40,7 @@ class DWFormer(nn.Module):
         self.dt1 = DWFormerBlock(feadim, n_head, FFNdim)
         self.dt2 = DWFormerBlock(feadim, n_head, FFNdim)
         self.dt3 = DWFormerBlock(feadim, n_head, FFNdim)
+        self.dt4 = DWFormerBlock(feadim, n_head, FFNdim)
         self.classifier = classifier(feadim, classnum)
         self.PE = PositionalEncoding(feadim)
         self.ln1 = nn.LayerNorm(feadim,eps = 1e-5)
